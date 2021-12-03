@@ -1,3 +1,24 @@
+#include <unistd.h>/*contains sbrk system call definition*/
+#include <errno.h>/*Not necessary. Will be helpful if different errors when calling sbrk need to be handled differently*/
+#include <stdio.h>/*perror defined here*/
+
+
+void *malloc_n(size_t size)
+{
+
+        //Extend heap memory by size bytes and return pointer to start of the memory
+        void *p = sbrk(size);
+
+        //If call to sbrk failed print diagnostic message and return NULL
+        if(p == (void *) -1)
+        {
+                perror("");
+                return NULL;
+        }
+
+        return p;/*Return a pointer to the beginning of memory block*/
+}
+
 /*Function to free memory allocated using malloc*/
 void free_n(void *ptr)
 {
