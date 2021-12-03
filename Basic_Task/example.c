@@ -9,7 +9,7 @@ int main()
 	
 	if(a == NULL)
 	{
-		perror("Call to malloc failed");
+		printf("Call to malloc failed\n");
 	}
 
 	
