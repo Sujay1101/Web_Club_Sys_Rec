@@ -1,6 +1,7 @@
 #include <unistd.h>/*contains sbrk system call definition*/
 #include <errno.h>/*Not necessary. Will be helpful to identify type of error encountered if any by sbrk*/
 #include <stdio.h>/*perror defined here*/
+#include <stdbool.h>/*boolean datatype defined here*/
 
 //datatype to store metadata of the memory allocation
 typedef struct metadata{
