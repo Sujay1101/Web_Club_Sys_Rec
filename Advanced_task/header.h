@@ -94,7 +94,7 @@ void free_n(void *m)
 	while((void *)(temp + 1) != m)
 		temp = temp->next;
 
-	//change status free
+	//change free field to true
 	temp->free = true;
 	return;
 }
