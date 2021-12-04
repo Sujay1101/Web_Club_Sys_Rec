@@ -12,7 +12,7 @@ typedef struct metadata{
 void *malloc_n(size_t size)
 {
         //Initialize metadata of the allocation
-        metadata *m = sbrk(sizeof(metadata));
+        metadata *m = (metadata *)sbrk(sizeof(metadata));
         
         //If memory could not be allocated print diagnostic message and return NULL
         if(m == (void *)-1)
@@ -40,7 +40,7 @@ void *malloc_n(size_t size)
 
 void free_n(void *p)
 {
-        metadata *m = (char *)p - sizeof(metadata));
+        metadata *m = (metadata *)(p - sizeof(metadata));
         m->occupied = false;
         return;
 }
