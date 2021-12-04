@@ -87,7 +87,7 @@ void *malloc_n(size_t size)
 
 void free_n(void *m)
 {
-	//traverse linked list
+	/*traverse linked list*/
 	metadata *temp = blocks.head;
 
 	//find memory block referenced by the argument
