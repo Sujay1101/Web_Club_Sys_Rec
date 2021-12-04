@@ -3,18 +3,16 @@
 #include <stdio.h>/*perror defined here*/
 #include <stdbool.h>/*boolean datatype defined here*/
 
-//datatype to store metadata of the memory allocation by malloc_n
+//datatype to store metadata of the memory allocation
 typedef struct metadata{
         size_t size;/*size of memory allocation*/
-        bool occupied;/*True if the memory is in use. False oif memory freed*/
+        bool occupied;/*True if the memory is in use. False otherwise*/
 } metadata;
 
-//Function returns pointer to the beginning of a block of memory of length size
-//Function first allocates space to the metadata then initializes the metadata and finally allocates space to the data
 void *malloc_n(size_t size)
 {
 
-        //Allocate memory to the metadata of the memory allocation
+        //Allocate memory to the metadata of the allocation
         metadata *m = (metadata *)sbrk(sizeof(metadata));
         
         //If memory could not be allocated to the metadata print diagnostic message and return NULL
@@ -41,15 +39,13 @@ void *malloc_n(size_t size)
         return d;
 }
 
-//Function to free a block of memory previously allocated by the malloc function 
-//First updates status field in the metadata and then dellocates memory occupied by data and metadata
 void free_n(void *p)
 {
         metadata *m = (metadata *)(p - sizeof(metadata));/*m points to the metadata of memory pointed by p*/
         m->occupied = false;/*update status of the allocation*/
 
 	sbrk(-(m->size)); /*deallocate memory occupied by data*/
-	sbrk(-sizeof(metadata));/*deallocate memory occupied by the metadata*/
+	sbrk(-sizeof(metadata));/*deallocate memory occupied by metadata*/
 
         return;
 }
