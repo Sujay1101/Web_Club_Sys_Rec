@@ -13,4 +13,5 @@ example.c contains program using the malloc function
 header.h contains definition of malloc and free functions
 example.c contains program using the malloc and free functions
 
+### Compilation instructions
 Place header.h file under the same directory as example.c. To compile example.c use the command cc example.c  
