@@ -10,7 +10,7 @@ typedef struct metadata{
 void *malloc_n(size_t size)
 {
         //Allocate memory to metadata of the allocation
-        metadata *m = sbrk(sizeof(metadata));
+        metadata *m = (metadata *)sbrk(sizeof(metadata));
         
         //If memory could not be allocated print diagnostic message and return NULL
         if(m == (void *)-1)
