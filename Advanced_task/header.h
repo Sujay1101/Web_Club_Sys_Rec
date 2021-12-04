@@ -22,9 +22,6 @@ typedef struct list{
 
 //Initialize linked list
 list blocks = {NULL, NULL};
-/*
-blocks.head = NULL; initialise head as NULL
-blocks.tail = NULL;initialise tail as NULL*/
 
 //function to find free memory block with size greater than size 
 metadata *search(list l, size_t size)
