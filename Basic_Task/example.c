@@ -5,10 +5,12 @@ int main()
 {
 	
 	int *a = (int *)malloc_n(sizeof(int) * 4);
-
+	
+	//If call to malloc failed
 	if(a == NULL)
 	{
-		printf("Call to malloc failed\n");
+		printf("Call to malloc failed\n");//print diagnostic message
+		return 1; //terminate abnormally
 	}
 
 	return 0;
