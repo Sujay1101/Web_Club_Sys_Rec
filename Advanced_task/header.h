@@ -21,9 +21,10 @@ typedef struct list{
 }list;
 
 //Initialize linked list
-list blocks;
-blocks.head = NULL;/*initialise head as NULL*/
-blocks.tail = NULL;/*initialise tail as NULL*/
+list blocks = {NULL, NULL};
+/*
+blocks.head = NULL; initialise head as NULL
+blocks.tail = NULL;initialise tail as NULL*/
 
 //function to find free memory block with size greater than size 
 metadata *search(list l, size_t size)
@@ -62,8 +63,8 @@ void *malloc_n(size_t size)
 	else/*request OS for memory*/
 	{
 		//Allocate memory for metadata and data
-		n = (metadata *)sbrk(sizeof(metadata));
-		d = sbrk(size);
+		metadata *n = (metadata *)sbrk(sizeof(metadata));
+		void *d = sbrk(size);
 
 		//Initialize metadata of memory block
 		n->free = false;
@@ -72,7 +73,7 @@ void *malloc_n(size_t size)
 		
 		/*Appending metadata to linked list*/
 		//If list was empty
-		if(head == NULL)
+		if(blocks.head == NULL)
 		{
 			//Set head and tail to point to metadata 
 			blocks.head = n;
