@@ -1,4 +1,4 @@
-# Web Club Systems SIG recruitment task
+# Web Club Systems SIG 2021 recruitment task
 ## Operating systems task
 
 The repository contains two folders basic and advanced containing solutions for the basic and advanced task respectively.
