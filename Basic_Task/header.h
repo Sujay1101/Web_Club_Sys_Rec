@@ -1,20 +1,32 @@
-#include <unistd.h>
-#include <errno.h>
-#include <stdio.h>
+#include <unistd.h>/*Header file defines sbrk system call*/
+#include <stdio.h>/*perror defined here*/
 
+//datatype to store metadata of the memory allocation
+typedef struct metadata{
+        size_t size;/*size of memory allocation*/
+        bool occupied;/*True if the memory is in use. False otherwise*/
+} metadata;
 
 void *malloc_n(size_t size)
 {
+        //Initialize metadata of the allocation
+        metadata m;
+        m. size = size;
+        m.occupied = true;
 
-        //Extend heap memory by size bytes and return pointer to start of the memory
-        void *p = sbrk(size);
+        //Allocate memory to metadata
+        sbrk(sizeof(metadata));
 
-        //If call to sbrk failed print diagnostic message and return NULL
-        if(p == (void *) -1)
+        //Allocate memory to data
+        void *d = sbrk(size);
+
+        //If memory could not be allocated to metadata print diagnostic message and return NULL
+        if(d == (void *)-1)
         {
                 perror("");
                 return NULL;
         }
 
-        return p;/*Return a pointer to the beginning of memory block*/
+        //Return pointer to data
+        return d;
 }
