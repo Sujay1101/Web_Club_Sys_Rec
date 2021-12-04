@@ -2,29 +2,39 @@
 #include <errno.h>/*Not necessary. Will be helpful to identify type of error encountered if any by sbrk*/
 #include <stdio.h>/*perror defined here*/
 
-//Function to allocate memory in the heap
-//Returns a pointer to the beginning of the block of memory
+//datatype to store metadata of the memory allocation
+typedef struct metadata{
+        size_t size;/*size of memory allocation*/
+        bool occupied;/*True if the memory is in use. False otherwise*/
+} metadata;
+
 void *malloc_n(size_t size)
 {
+        //Initialize metadata of the allocation
+        metadata m;
+        m. size = size;
+        m.occupied = true;
 
-        //Extend heap memory by size bytes and return pointer to start of the memory
-        void *p = sbrk(size);
+        //Allocate memory to metadata
+        sbrk(sizeof(metadata));
 
-        //If call to sbrk failed print diagnostic message and return NULL
-        if(p == (void *) -1)
+        //Allocate memory to data
+        void *d = sbrk(size);
+
+        //If memory could not be allocated to metadata print diagnostic message and return NULL
+        if(d == (void *)-1)
         {
                 perror("");
                 return NULL;
         }
 
-        return p;/*Return a pointer to the beginning of memory block*/
+        //Return pointer to data
+        return d;
 }
 
-/*Function to free memory allocated using malloc_n function*/
-void free_n(void *ptr)
+void free_n(void *p)
 {
-        /*header points to the beginning of the metadata of malloc_n allocation*/
-        size_t *header = (char *)ptr - SIZE_T_SIZE;
-        *header = *header & ~1L;//set the status bit of the metadata to 0 indicating memory freed
+        metadata *m = (char *)p - sizeof(metadata));
+        m->occupied = false;
         return;
 }
