@@ -5,9 +5,9 @@
  */
 
 #include <unistd.h>/*Library defines sbrk system call*/
-#include <stdbool.h>/*Contains definietion of boolean datatype*/
+#include <stdbool.h>/*Contains definition of boolean datatype*/
 
-//maetadata is stored just before the memory block
+//metadata is stored just before the memory block
 typedef struct metadata{
 	size_t size;
 	void *next;
@@ -25,12 +25,14 @@ list blocks;
 blocks.head = NULL;/*initialise head as NULL*/
 blocks.tail = NULL;/*initialise tail as NULL*/
 
+//function to find free memory block with size greater than size 
 metadata *search(list l, size_t size)
 {
-	//Traverse the free list
 	metadata *temp = l.head;
 	if(temp == NULL)
 		return NULL;
+	
+	//Traverse the list
 	do
 	{
 		//If block is free and size of block more than size 
